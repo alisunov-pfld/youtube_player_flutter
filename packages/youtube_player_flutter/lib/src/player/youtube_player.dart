@@ -296,12 +296,14 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
         fit: StackFit.expand,
         clipBehavior: Clip.none,
         children: [
-          Transform.scale(
-            scale: controller.value.isFullScreen
-                ? (1 / _aspectRatio * MediaQuery.of(context).size.width) /
-                    MediaQuery.of(context).size.height
-                : 1,
-            child: RawYoutubePlayer(
+          /// commented, because it shrinks the video when fullscreen
+          // Transform.scale(
+          //   scale: controller.value.isFullScreen
+          //       ? (1 / _aspectRatio * MediaQuery.of(context).size.width) /
+          //           MediaQuery.of(context).size.height
+          //       : 1,
+          //   child:
+            RawYoutubePlayer(
               key: widget.key,
               onEnded: (YoutubeMetaData metaData) {
                 if (controller.flags.loop) {
@@ -313,7 +315,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
                 widget.onEnded?.call(metaData);
               },
             ),
-          ),
+          // ),
           if (!controller.flags.hideThumbnail)
             AnimatedOpacity(
               opacity: controller.value.isPlaying ? 0 : 1,
